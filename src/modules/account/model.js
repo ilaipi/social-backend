@@ -22,9 +22,10 @@ module.exports = (Schema) => {
       comment: '头像',
       remark: '同一个人在不同社交媒体上头像不同'
     },
-    app: {
-      type: String,
-      comment: '小程序id'
+    tag: {
+      type: Schema.Types.ObjectId,
+      ref: 'Tag',
+      remark: '暂定每个账户只能属于一个标签'
     }
   });
 

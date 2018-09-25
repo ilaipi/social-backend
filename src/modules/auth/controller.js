@@ -55,25 +55,12 @@ const userinfo = async ctx => {
   ctx.body = { success: true };
 };
 
-/**
- * 获取用户正确的注册页面
- * 1, 鼻科联盟。特邀用户，使用特邀注册的页面。特邀注册页面，医院可以随意输入
- * 2，鼻科联盟。非特邀用户，使用普通的注册页面。普通注册页面，医院必须选择联盟的医院
- * @deprecated
- * @see src/modules/link/controller.js#userRegister
- */
-const register = async ctx => {
-  ctx.redirect('/register.html');
-};
-
 const authed = ctx => {
   ctx.body = { authed: ctx.isAuthenticated(), account: ctx.account };
 };
 
 module.exports.register = function ({ unauth, wechat }) {
   unauth.get('/auth/login', login);
-  unauth.get('/auth/register', register);
   wechat.post('/userinfo', userinfo);
-  wechat.get('/auth/register', register);
   unauth.get('/authed', authed);
 };
